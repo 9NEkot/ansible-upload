@@ -1,0 +1,20 @@
+
+
+#Django
+SECRET_KEY="my_secret_key"
+DJ_DEBUG=1
+DJ_SECRET='d______________132l_'
+
+
+ALLOWED_HOSTS='localhost 127.0.0.1 0.0.0.0 [::1] *'
+
+
+# database access credentials
+DJ_DB_ENGINE=django.db.backends.postgresql
+DJ_DB_NAME=testdb
+DJ_DB_HOST=pg_app
+DJ_DB_PORT=5432
+DJ_APP_PORT=8000
+DJ_DB_USER="root"
+DJ_DB_PASS="\""
+

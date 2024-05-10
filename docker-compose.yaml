@@ -1,0 +1,41 @@
+services:
+  app:
+    container_name: web_app
+    build: ./web_app
+    ports:
+      - "8000:8000"
+    command: 'sh -c "gunicorn web_app.wsgi:application --bind 0.0.0.0:8000"'
+    restart: "on-failure"
+    env_file:
+      - .env
+    # command: "python manage.py makemigration"
+
+
+  db:
+
+    # image: postgres
+    build: ./pg_app
+    restart: always
+    container_name: pg_app
+    
+    environment:
+      POSTGRES_PASSWORD: ${DJ_DB_PASS}
+      POSTGRES_USER: ${DJ_DB_USER}
+
+    # volumes:
+    #   - ./pg/init-db.sh:/docker-entrypoint/init-database.sh
+
+    # command: ["psql", "-f", "/docker-entrypoint-initdb.d/init.sql", "-U", "${DJ_DB_USER}"]
+    ports:
+      - ${DJ_DB_PORT}:27017
+
+  ngx_app:
+    container_name: webapp_nginx
+    build: ./ngx_app
+    ports:
+      - "80:80"
+    restart: "on-failure"
+    # command: [nginx-debug, '-g', 'daemon off;']
+
+volumes :
+  db:
