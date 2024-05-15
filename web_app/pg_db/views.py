@@ -17,5 +17,4 @@ def healthcheck(request):
         
         with open("/out.sh", "r") as t:
             message.update({r: t.read()})
-
-    return Response(message)
+    return Response({f"message": message})
