@@ -1,6 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 import subprocess as sp
+import os
 
 
 @api_view()
@@ -12,7 +13,8 @@ def healthcheck(request):
     for r in runn:
         rr = f"docker inspect {r} |jq '.[].State'"
 
-        sp.run(["echo", rr, ">", "/docker-status-pipe"])
+        os.system(f"echo {rr} > /docker-status-pipe ")
+        
         with open("/out.sh", "r") as t:
             message.update({r: t.read()})
 
