@@ -35,4 +35,4 @@ def healthcheck(request):
                     }
                 )
 
-    return Response({f"message": message})
+    return Response(message)
