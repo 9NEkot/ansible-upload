@@ -11,7 +11,7 @@ services:
     volumes:
       # - /www:/docker-status-pipe
       # - /www/docker-out.txt:/out.txt
-      - type: bind
+      - type: volume
         source: ./docker-status-pipe
         target: /docker-status-pipe
       - type: bind 
