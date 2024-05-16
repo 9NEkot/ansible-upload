@@ -16,7 +16,7 @@ def healthcheck(request):
         
 
 
-        with open("/out.sh", "r") as t:
+        with open("/docker-out.txt", "r") as t:
             message.update({r: t.read()})
 
     return Response({f"message": message})
