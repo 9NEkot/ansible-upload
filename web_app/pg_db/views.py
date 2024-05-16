@@ -25,7 +25,9 @@ def healthcheck(request):
     runn = ["web_app", "pg_app", "webapp_nginx"]
     with open("/docker-status-pipe", "w") as pipe:
         for r in runn:
-            pipe.write(f"docker inspect {r}")
+            cmd = f"docker inspect {r} |jq '.[].State' "
+            pipe.write(cmd)
+
             with open("/out.sh", "r") as t:
                 message.update(
                     {
