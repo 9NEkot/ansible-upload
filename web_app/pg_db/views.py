@@ -17,7 +17,7 @@ def healthcheck(request):
     #     # os.system(f"echo {rr} > /docker-status-pipe ")
     #     os.system(f"echo {rr} > /docker-status-pipe")
     with open("/docker-status-pipe", "w") as pipe:
-        pipe.write("doker inspect web_app")
+        pipe.write("docker inspect web_app")
 
     with open("/out.sh", "r") as t:
         message.update({"web+app": t.read()})
