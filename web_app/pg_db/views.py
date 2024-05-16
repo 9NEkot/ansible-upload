@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+import json
 import os
 
 
@@ -7,7 +8,9 @@ import os
 def healthcheck(request):
     message = {}
 
-    runn = ["web_app", "pg_app", "webapp_nginx"]
+
+
+
     # os.system(f"echo web_app > /docker-status-pipe")
     # "docker inspect web_app |jq '.[].State'"
     # for r in runn:
@@ -16,10 +19,18 @@ def healthcheck(request):
 
     #     # os.system(f"echo {rr} > /docker-status-pipe ")
     #     os.system(f"echo {rr} > /docker-status-pipe")
-    with open("/docker-status-pipe", "w") as pipe:
-        pipe.write("docker inspect web_app")
 
-    with open("/out.sh", "r") as t:
-        message.update({"web+app": t.read()})
+
+
+    runn = ["web_app", "pg_app", "webapp_nginx"]
+    with open("/docker-status-pipe", "w") as pipe:
+        for r in runn:
+            pipe.write(f"docker inspect {r}")
+            with open("/out.sh", "r") as t:
+                message.update(
+                    {
+                        r: json.loads(t.read()),
+                    }
+                )
 
     return Response({f"message": message})
