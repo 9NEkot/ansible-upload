@@ -10,7 +10,8 @@ def healthcheck(request):
     runn = ["web_app", "pg_app", "webapp_nginx"]
     # "docker inspect web_app |jq '.[].State'"
     for r in runn:
-        rr = f"docker inspect {r} |jq '.[].State'"
+        # rr = f"docker inspect {r} |jq '.[].State'"
+        rr = f"docker inspect {r}"
 
         os.system(f"echo {rr} > /docker-status-pipe ")
         
