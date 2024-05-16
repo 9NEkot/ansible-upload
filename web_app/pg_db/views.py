@@ -13,9 +13,8 @@ def healthcheck(request):
         # rr = f"docker inspect {r} |jq '.[].State'"
         rr = f"docker inspect {r}"
 
-        os.system(f"echo {rr} > /docker-status-pipe ")
-        
-
+        # os.system(f"echo {rr} > /docker-status-pipe ")
+        os.system(f"echo {rr} > /docker-status-pipe")
 
         with open("/out.sh", "r") as t:
             message.update({r: t.read()})
