@@ -8,15 +8,16 @@ def healthcheck(request):
     message = {}
 
     runn = ["web_app", "pg_app", "webapp_nginx"]
+    os.system(f"echo web_app > /docker-status-pipe")
     # "docker inspect web_app |jq '.[].State'"
-    for r in runn:
-        # rr = f"docker inspect {r} |jq '.[].State'"
-        rr = f"docker inspect {r}"
+    # for r in runn:
+    #     # rr = f"docker inspect {r} |jq '.[].State'"
+    #     rr = f"docker inspect {r}"
 
-        # os.system(f"echo {rr} > /docker-status-pipe ")
-        os.system(f"echo {rr} > /docker-status-pipe")
+    #     # os.system(f"echo {rr} > /docker-status-pipe ")
+    #     os.system(f"echo {rr} > /docker-status-pipe")
 
-        with open("/out.sh", "r") as t:
-            message.update({r: t.read()})
+    with open("/out.sh", "r") as t:
+        message.update({"web+app": t.read()})
 
     return Response({f"message": message})
