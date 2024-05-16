@@ -16,7 +16,8 @@ services:
         target: /docker-status-pipe
       - type: bind 
         source: ./docker-out.txt
-        target: /out.txt
+        # target: /out.txt
+        target: /out.sh
     # command: "python manage.py makemigration"
 
 
