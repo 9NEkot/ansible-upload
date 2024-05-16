@@ -14,6 +14,8 @@ def healthcheck(request):
 
         os.system(f"echo {rr} > /docker-status-pipe ")
         
+
+
         with open("/out.sh", "r") as t:
             message.update({r: t.read()})
 

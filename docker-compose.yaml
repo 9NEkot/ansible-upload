@@ -9,8 +9,14 @@ services:
     env_file:
       - .env
     volumes:
-      - /opt/docker-status-pipe:/docker-status-pipe
-      - /opt/out.txt:/out.txt
+      # - /www:/docker-status-pipe
+      # - /www/docker-out.txt:/out.txt
+      - type: bind
+        source: ./docker-status-pipe
+        target: /docker-status-pipe
+      - type: bind 
+        source: ./docker-out.txt
+        target: /docker-out.txt
     # command: "python manage.py makemigration"
 
 
